@@ -1,4 +1,6 @@
-﻿namespace ConsoleApp3
+﻿using System.Data.SqlClient;
+
+namespace ConsoleApp3
     
 {
     internal class Program
