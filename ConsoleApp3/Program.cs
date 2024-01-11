@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using SQLLabb1;
+using System.Data.SqlClient;
 
 namespace ConsoleApp3
     
@@ -7,14 +8,20 @@ namespace ConsoleApp3
     {
         static void Main(string[] args)
         {
-            string conntectionString = @"Data Source = (localdb)\.; Initial Catalog = SchoolLabb1; Integrated Security = True; Pooling = False";
-            using (SqlConnection connection = new SqlConnection(conntectionString))
-            {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand()) 
-                { 
-                }
-            }
+            UI.Menu();
+
+            //string conntectionString = @"Data Source=(localdb)\.;Initial Catalog=SchoolLabb1;Integrated Security=True";
+            //using (SqlConnection connection = new SqlConnection(conntectionString))
+            //{
+            //    connection.Open();
+            //    using (SqlCommand command = new SqlCommand())
+            //    {
+            //        using (SqlDataReader reader = command.ExecuteReader())
+            //        {
+
+            //        }
+            //    }
+            //}
         }
     }
 }
