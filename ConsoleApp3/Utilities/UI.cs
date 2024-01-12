@@ -52,6 +52,7 @@ namespace SQLLabb1.Utilities
             switch (studentOption)
             {
                 case 1:
+                    ListAll.ListAllStudents();
                     break;
                 case 2:
                     break;
@@ -75,6 +76,7 @@ namespace SQLLabb1.Utilities
             switch (employeesOption)
             {
                 case 1:
+                    ListAll.ListAllEmployees();
                     break;
                 case 2:
                     break;
