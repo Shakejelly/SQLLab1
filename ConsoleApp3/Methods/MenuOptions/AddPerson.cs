@@ -86,14 +86,15 @@ namespace SQLLabb1.Methods.MenuOptions
             string eRole = Console.ReadLine();
             Console.SetCursorPosition(0, Console.CursorTop - 1);
             Utlities.ClearCurrentConsoleLine();
-            Console.Write("CourseID: ");
+         
 
             string connectionString = @"Data Source=(localdb)\.;Initial Catalog=SchoolLabb1;Integrated Security=True";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
+
                 string insertQuery = "INSERT INTO Employees (FirstName, LastName, Role)" +
-                    "VALUES @FirstName, @LastName, @Role";
+                    "VALUES (@FirstName, @LastName, @Role)";
 
                 using (SqlCommand command = new SqlCommand(insertQuery, connection))
                 {

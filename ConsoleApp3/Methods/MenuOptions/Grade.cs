@@ -7,46 +7,45 @@ using System.Threading.Tasks;
 
 namespace SQLLabb1.Methods.MenuOptions
 {
-    internal class ListAll
+    internal class Grade
     {
-        public static void ListAllStudents()
+        public static void GetLatestGrades()
         {
             string connectionString = @"Data Source=(localdb)\.;Initial Catalog=SchoolLabb1;Integrated Security=True";
-
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
 
-                string insertQuery = "SELECT * FROM Students";
+                string insertQuery = " ";
 
-                using (SqlCommand commands = new SqlCommand(insertQuery, connection))
+                using (SqlCommand sqlCommand = new SqlCommand(insertQuery))
                 {
-                    using (SqlDataReader reader = commands.ExecuteReader())
+                    using (SqlDataReader reader = sqlCommand.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            Console.WriteLine($"");
+                            Console.WriteLine(" ");
                         }
                     }
                 }
             }
         }
-        public static void ListAllEmployees()
+        public static void GetAverageGrades()
         {
             string connectionString = @"Data Source=(localdb)\.;Initial Catalog=SchoolLabb1;Integrated Security=True";
-
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string insertQuery = "SELECT * FROM Employees";
 
-                using (SqlCommand commands = new SqlCommand(insertQuery, connection))
+                string insertQuery = " ";
+
+                using (SqlCommand sqlCommand = new SqlCommand(insertQuery))
                 {
-                    using (SqlDataReader reader = commands.ExecuteReader())
+                    using (SqlDataReader reader = sqlCommand.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            Console.WriteLine($"Firstname: {reader["FirstName"]} LastName: {reader["LastName"]} Role: {reader["Role"]} ");
+                            Console.WriteLine(" ");
                         }
                     }
                 }

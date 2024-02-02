@@ -55,6 +55,7 @@ namespace SQLLabb1.Utilities
                     ListAll.ListAllStudents();
                     break;
                 case 2:
+                    ListSpecific.ListSpecificStudent();
                     break;
                 case 3:
                     Console.Clear();
@@ -79,6 +80,7 @@ namespace SQLLabb1.Utilities
                     ListAll.ListAllEmployees();
                     break;
                 case 2:
+                    ListSpecific.ListSpecificEmployee();
                     break;
                 case 3:
                     Console.Clear();
@@ -100,8 +102,10 @@ namespace SQLLabb1.Utilities
             switch (gradesOption)
             {
                 case 1:
+                    Grade.GetLatestGrades();
                     break;
                 case 2:
+                    Grade.GetAverageGrades();
                     break;
                 case 3:
                     Console.Clear();
