@@ -16,15 +16,22 @@ namespace SQLLabb1.Methods.MenuOptions
             {
                 connection.Open();
 
-                string insertQuery = " ";
+                string insertQuery = @"
+                SELECT *
+                FROM (
+                    SELECT *, ROW_NUMBER() OVER(PARTITION BY StudentId ORDER BY DateReceived DESC) AS rn
+                    FROM Grades
+                ) AS subquery
+                WHERE rn = 1;
+            ";
 
-                using (SqlCommand sqlCommand = new SqlCommand(insertQuery))
+                using (SqlCommand sqlCommand = new SqlCommand(insertQuery, connection))
                 {
                     using (SqlDataReader reader = sqlCommand.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            Console.WriteLine(" ");
+                            Console.WriteLine($"StudentID: {reader["StudentID"]} Grade: {reader["Grade"]} DateReceived: {reader["DateReceived"]} ");
                         }
                     }
                 }
@@ -37,15 +44,17 @@ namespace SQLLabb1.Methods.MenuOptions
             {
                 connection.Open();
 
-                string insertQuery = " ";
+                string insertQuery = "SELECT AVG(CAST(Grade AS FLOAT)) AS AverageGrade FROM Grades";
 
-                using (SqlCommand sqlCommand = new SqlCommand(insertQuery))
+                using (SqlCommand sqlCommand = new SqlCommand(insertQuery, connection))
                 {
+                    object result = sqlCommand.ExecuteScalar();
+
                     using (SqlDataReader reader = sqlCommand.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            Console.WriteLine(" ");
+                            Console.WriteLine($"Average Grade: {result}");
                         }
                     }
                 }

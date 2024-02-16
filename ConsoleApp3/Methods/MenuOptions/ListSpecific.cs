@@ -17,36 +17,40 @@ namespace SQLLabb1.Methods.MenuOptions
             {
                 connection.Open();
 
-                string insertQuery = " ";
+                string insertQuery = "SELECT FirstName, LastName, Courses.Course FROM Students " +
+                                      "JOIN Courses ON Course.CourseId = Students.CourseId " +
+                                      "WHERE Courses.CourseId = @CourseID"; 
 
-                using (SqlCommand sqlCommand = new SqlCommand(insertQuery))
+                using (SqlCommand sqlCommand = new SqlCommand(insertQuery, connection))
                 {
                     using (SqlDataReader reader = sqlCommand.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            Console.WriteLine(" ");
+                            Console.WriteLine($"{reader["FirstName"]}, {reader["LastName"]}, {reader["Role"]}");
                         }
                     }
                 }
             }
         }
-        public static void ListSpecificEmployee()
+        static void ListSpecificEmployee()
         {
             string connectionString = @"Data Source=(localdb)\.;Initial Catalog=SchoolLabb1;Integrated Security=True";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
 
-                string insertQuery = " ";
+                string insertQuery = "SELECT * FROM Employees WHERE Role = @Role";
 
-                using (SqlCommand sqlCommand = new SqlCommand(insertQuery))
+                using (SqlCommand sqlCommand = new SqlCommand(insertQuery, connection))
                 {
+                    //sqlCommand.Parameters.AddWithValue("@Role", selectedRole);
+
                     using (SqlDataReader reader = sqlCommand.ExecuteReader())
                     {
                         while(reader.Read())
                         {
-                            Console.WriteLine(" ");
+                            Console.WriteLine($"{reader["EmployeeId"]}. {reader["LastName"]}, {reader["Role"]}");
                         }
                     }
                 }

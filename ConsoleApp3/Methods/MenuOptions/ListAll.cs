@@ -25,7 +25,7 @@ namespace SQLLabb1.Methods.MenuOptions
                     {
                         while (reader.Read())
                         {
-                            Console.WriteLine($"");
+                            Console.WriteLine($"First Name: {reader["FirstName"]} LastName: {reader["LastName"]} Age: {reader["Age"]}");
                         }
                     }
                 }
