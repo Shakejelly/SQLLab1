@@ -16,22 +16,24 @@ namespace SQLLabb1.Methods.MenuOptions
             {
                 connection.Open();
 
-                string insertQuery = @"
-                SELECT *
-                FROM (
-                    SELECT *, ROW_NUMBER() OVER(PARTITION BY StudentId ORDER BY DateReceived DESC) AS rn
-                    FROM Grades
-                ) AS subquery
-                WHERE rn = 1;
-            ";
+                DateTime months = DateTime.Now.AddMonths(-1);
+                string query = $"SELECT Students.FirstName + Students.LastName AS StudentName, Courses.Course, Grades.Grade " +
+                               $"FROM Grades " +
+                               $"INNER JOIN Students ON Grades.StudentId = Students.StudentId " +
+                               $"INNER JOIN Courses ON Grades.CourseId = Courses.CourseId " +
+                               $"WHERE Grades.GradeDate >= @LastMonth";
 
-                using (SqlCommand sqlCommand = new SqlCommand(insertQuery, connection))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                    command.Parameters.AddWithValue("@LastMonth", months);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
+                        Console.Clear();
+                        Console.WriteLine($"Grades of the student from the past month.");
                         while (reader.Read())
                         {
-                            Console.WriteLine($"StudentID: {reader["StudentID"]} Grade: {reader["Grade"]} DateReceived: {reader["DateReceived"]} ");
+                            Console.WriteLine($"{reader["StudentName"]}, {reader["Course"]}, {reader["Grade"]}");
                         }
                     }
                 }
@@ -39,22 +41,30 @@ namespace SQLLabb1.Methods.MenuOptions
         }
         public static void GetAverageGrades()
         {
+            Console.Clear();
             string connectionString = @"Data Source=(localdb)\.;Initial Catalog=SchoolLabb1;Integrated Security=True";
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
 
-                string insertQuery = "SELECT AVG(CAST(Grade AS FLOAT)) AS AverageGrade FROM Grades";
 
-                using (SqlCommand sqlCommand = new SqlCommand(insertQuery, connection))
+                string query = "SELECT " +
+                               "Courses.CourseId, " +
+                               "Courses.Course, " +
+                               "AVG(CAST(Grades.Grade AS FLOAT)) AS AverageGrade, " +
+                               "FROM Courses " +
+                               "LEFT JOIN Grades ON Courses.CourseId = Grades.CourseId ";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    object result = sqlCommand.ExecuteScalar();
-
-                    using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
+                        Console.WriteLine("CourseID | Course | AverageGrade");
                         while (reader.Read())
                         {
-                            Console.WriteLine($"Average Grade: {result}");
+                            Console.WriteLine();
+                            Console.WriteLine($"{reader["CourseId"]}, {reader["Course"]}, {reader["AverageGrade"]}");
                         }
                     }
                 }
@@ -62,3 +72,4 @@ namespace SQLLabb1.Methods.MenuOptions
         }
     }
 }
+
