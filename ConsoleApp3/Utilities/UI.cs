@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using SQLLabb1.Methods;
 using SQLLabb1.Methods.MenuOptions;
 
@@ -13,33 +14,51 @@ namespace SQLLabb1.Utilities
     {
         public static void Menu()
         {
+            bool timer = true;
 
-            Console.WriteLine("1. Students. ");
-            Console.WriteLine("2. Employees. ");
-            Console.WriteLine("3. Grades. ");
-            Console.WriteLine("4. Add. ");
-
-            int menuOption = Convert.ToInt32(Console.ReadLine());
-            switch (menuOption)
+            while (timer)
             {
-                case 1:
-                    Students();
-                    break;
-                case 2:
-                    Employees();
-                    break;
-                case 3:
-                    Grades();
-                    break;
-                case 4:
-                    Add();
-                    break;
-                case 5:
-                    Environment.Exit(0);
-                    break;
-                default:
-                    Console.WriteLine("Invalid input");
-                    break;
+
+               
+
+                Console.WriteLine("1. Students. ");
+                Console.WriteLine("2. Employees. ");
+                Console.WriteLine("3. Grades. ");
+                Console.WriteLine("4. Add. ");
+                Console.WriteLine("5. Exit. ");
+
+
+                string input = Console.ReadLine();
+                
+                int menuOption;
+                if (int.TryParse(input, out menuOption))
+                {
+                    switch (menuOption)
+                    {
+                        case 1:
+                            Students();
+                            break;
+                        case 2:
+                            Employees();
+                            break;
+                        case 3:
+                            Grades();
+                            break;
+                        case 4:
+                            Add();
+                            break;
+                        case 5:
+                            timer = false;
+                            break;
+                        default:
+                            Console.WriteLine("Invalid input");
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Please put in a number between 1-5.");
+                }
             }
         }
         public static void Students()
@@ -56,6 +75,7 @@ namespace SQLLabb1.Utilities
                     ListAll.ListAllStudents();
                     break;
                 case 2:
+
                     ListSpecific.ListSpecificStudent();
                     break;
                 case 3:
