@@ -11,21 +11,29 @@ namespace SQLLabb1.Methods.MenuOptions
     {
         public static void ListAllStudents()
         {
-            string connectionString = @"Data Source=(localdb)\.;Initial Catalog=SchoolLabb1;Integrated Security=True";
+            Console.WriteLine("Sort by: 1. First Name 2. Last Name");
+            int sortOption = Convert.ToInt32(Console.ReadLine());
+            string sortColumn = sortOption == 1 ? "FirstName" : "LastName";
+            Console.WriteLine("Order: 1. Ascending 2. Descending");
+            int orderOption = Convert.ToInt32(Console.ReadLine());
+            string order = orderOption == 1 ? "ASC" : "DESC";
+
+            string connectionString = @"Data Source=(localdb)\.;Initial Catalog=SchoolLabb;Integrated Security=True";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
 
-                string insertQuery = "SELECT * FROM Students";
+                string sqlQuery = $"SELECT * FROM Students ORDER BY {sortColumn} {order}";
 
-                using (SqlCommand commands = new SqlCommand(insertQuery, connection))
+
+                using (SqlCommand commands = new SqlCommand(sqlQuery, connection))
                 {
                     using (SqlDataReader reader = commands.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            Console.WriteLine($"");
+                            Console.WriteLine($"Student: {reader["FirstName"]} {reader[\"LastName"]}, Age: {reader["Age"]}, ClassID: {reader["ClassID"]}");
                         }
                     }
                 }
@@ -33,14 +41,14 @@ namespace SQLLabb1.Methods.MenuOptions
         }
         public static void ListAllEmployees()
         {
-            string connectionString = @"Data Source=(localdb)\.;Initial Catalog=SchoolLabb1;Integrated Security=True";
+            string connectionString = @"Data Source=(localdb)\.;Initial Catalog=SchoolLabb;Integrated Security=True";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string insertQuery = "SELECT * FROM Employees";
+                string sqlQuery = "SELECT * FROM Employees";
 
-                using (SqlCommand commands = new SqlCommand(insertQuery, connection))
+                using (SqlCommand commands = new SqlCommand(sqlQuery, connection))
                 {
                     using (SqlDataReader reader = commands.ExecuteReader())
                     {

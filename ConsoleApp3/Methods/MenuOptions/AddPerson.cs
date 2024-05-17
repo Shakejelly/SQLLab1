@@ -35,7 +35,7 @@ namespace SQLLabb1.Methods.MenuOptions
             Utlities.ClearCurrentConsoleLine();
 
 
-            string conntectionString = @"Data Source=(localdb)\.;Initial Catalog=SchoolLabb1;Integrated Security=True";
+            string conntectionString = @"Data Source=(localdb)\.;Initial Catalog=SchoolLabb;Integrated Security=True";
             using (SqlConnection connection = new SqlConnection(conntectionString))
             {
                 connection.Open();
@@ -69,6 +69,7 @@ namespace SQLLabb1.Methods.MenuOptions
                     }
                 }
             }
+            Console.ReadLine();
         }
         public static void AddEmployees()
         {
@@ -88,7 +89,7 @@ namespace SQLLabb1.Methods.MenuOptions
             Utlities.ClearCurrentConsoleLine();
          
 
-            string connectionString = @"Data Source=(localdb)\.;Initial Catalog=SchoolLabb1;Integrated Security=True";
+            string connectionString = @"Data Source=(localdb)\.;Initial Catalog=SchoolLabb;Integrated Security=True";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -122,6 +123,8 @@ namespace SQLLabb1.Methods.MenuOptions
 
                 }
             }
+            Console.ReadLine();
         }
+
     }
 }

@@ -17,6 +17,7 @@ namespace SQLLabb1.Utilities
             Console.WriteLine("2. Employees. ");
             Console.WriteLine("3. Grades. ");
             Console.WriteLine("4. Add. ");
+            Console.WriteLine("5. Exit. ");
 
             int menuOption = Convert.ToInt32(Console.ReadLine());
             switch (menuOption)

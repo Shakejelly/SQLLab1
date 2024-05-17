@@ -11,21 +11,21 @@ namespace SQLLabb1.Methods.MenuOptions
     {
         public static void ListSpecificStudent()
         {
-            string connectionString = @"Data Source=(localdb)\.;Initial Catalog=SchoolLabb1;Integrated Security=True";
+            string connectionString = @"Data Source=(localdb)\.;Initial Catalog=SchoolLabb;Integrated Security=True";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
 
-                string insertQuery = " ";
+                string sqlQuery = " ";
 
-                using (SqlCommand sqlCommand = new SqlCommand(insertQuery))
+                using (SqlCommand sqlCommand = new SqlCommand(sqlQuery))
                 {
                     using (SqlDataReader reader = sqlCommand.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            Console.WriteLine(" ");
+                            Console.WriteLine("");
                         }
                     }
                 }
@@ -33,20 +33,25 @@ namespace SQLLabb1.Methods.MenuOptions
         }
         public static void ListSpecificEmployee()
         {
-            string connectionString = @"Data Source=(localdb)\.;Initial Catalog=SchoolLabb1;Integrated Security=True";
+            string connectionString = @"Data Source=(localdb)\.;Initial Catalog=SchoolLabb;Integrated Security=True";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
+                Console.WriteLine("Enter the role:");
+                string role = Console.ReadLine();
 
-                string insertQuery = " ";
+                string insertQuery = "SELECT * FROM employees" +
+                    "WHERE Role = @Role";
 
-                using (SqlCommand sqlCommand = new SqlCommand(insertQuery))
+                using (SqlCommand sqlCommand = new SqlCommand(insertQuery, connection))
                 {
+                    sqlCommand.Parameters.AddWithValue("@Role", role);
+
                     using (SqlDataReader reader = sqlCommand.ExecuteReader())
                     {
                         while(reader.Read())
                         {
-                            Console.WriteLine(" ");
+                            Console.WriteLine($"Employee: {reader["FirstName"]} {reader["LastName"]}, Role: {reader["Role"]}");
                         }
                     }
                 }
