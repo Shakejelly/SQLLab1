@@ -33,7 +33,7 @@ namespace SQLLabb1.Methods.MenuOptions
                     {
                         while (reader.Read())
                         {
-                            Console.WriteLine($"Student: {reader["FirstName"]} {reader[\"LastName"]}, Age: {reader["Age"]}, ClassID: {reader["ClassID"]}");
+                            Console.WriteLine($"Student: {reader["FirstName"]} {reader["LastName"]}, Age: {reader["Age"]}, ClassID: {reader["ClassID"]}");
                         }
                     }
                 }
