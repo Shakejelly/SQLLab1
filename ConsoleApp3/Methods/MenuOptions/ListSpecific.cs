@@ -43,7 +43,7 @@ namespace SQLLabb1.Methods.MenuOptions
                 string insertQuery = "SELECT * FROM employees" +
                     "WHERE Role = @Role";
 
-                using (SqlCommand sqlCommand = new SqlCommand(insertQuery, connection))
+                using (SqlCommand sqlCommand = new SqlCommand(insertQuery))
                 {
                     sqlCommand.Parameters.AddWithValue("@Role", role);
 
