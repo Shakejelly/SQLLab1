@@ -19,9 +19,10 @@ namespace SQLLabb1.Utilities
             Console.WriteLine("4. Add. ");
             Console.WriteLine("5. Exit. ");
 
-            int menuOption = Convert.ToInt32(Console.ReadLine());
-            switch (menuOption)
-            {
+            if (int.TryParse(Console.ReadLine(), out int menuOption))
+            { 
+                switch (menuOption)
+                {
                 case 1:
                     Students();
                     break;
@@ -39,7 +40,14 @@ namespace SQLLabb1.Utilities
                     break;
                 default:
                     Console.WriteLine("Invalid input");
-                    break;
+                        Console.ReadLine();
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Press Enter to continue...");
+                Console.ReadLine();
             }
         }
         public static void Students()
@@ -49,22 +57,30 @@ namespace SQLLabb1.Utilities
             Console.WriteLine("2. Get all student from certain class.");
             Console.WriteLine("3. Exit ");
 
-            int studentOption = Convert.ToInt32(Console.ReadLine());
-            switch (studentOption)
+            if (int.TryParse(Console.ReadLine(), out int studentOption))
             {
-                case 1:
-                    ListAll.ListAllStudents();
-                    break;
-                case 2:
-                    ListSpecific.ListSpecificStudent();
-                    break;
-                case 3:
-                    Console.Clear();
-                    Menu();
-                    break;
-                default:
-                    Console.WriteLine("Invalid Input.");
-                    break;
+                switch (studentOption)
+                {
+                    case 1:
+                        ListAll.ListAllStudents();
+                        break;
+                    case 2:
+                        ListSpecific.ListSpecificStudent();
+                        break;
+                    case 3:
+                        Console.Clear();
+                        Menu();
+                        break;
+                    default:
+                        Console.WriteLine("Invalid Input.");
+                        Console.ReadLine();
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Press Enter to continue...");
+                Console.ReadLine();
             }
         }
         public static void Employees()
@@ -74,22 +90,30 @@ namespace SQLLabb1.Utilities
             Console.WriteLine("2. List all employees in certain role. ");
             Console.WriteLine("3. Exit ");
 
-            int employeesOption = Convert.ToInt32(Console.ReadLine());
-            switch (employeesOption)
+            if (int.TryParse(Console.ReadLine(), out int employeesOption))
             {
-                case 1:
-                    ListAll.ListAllEmployees();
-                    break;
-                case 2:
-                    ListSpecific.ListSpecificEmployee();
-                    break;
-                case 3:
-                    Console.Clear();
-                    Menu();
-                    break;
-                default:
-                    Console.WriteLine("Invalid Input");
-                    break;
+                switch (employeesOption)
+                {
+                    case 1:
+                        ListAll.ListAllEmployees();
+                        break;
+                    case 2:
+                        ListSpecific.ListSpecificEmployee();
+                        break;
+                    case 3:
+                        Console.Clear();
+                        Menu();
+                        break;
+                    default:
+                        Console.WriteLine("Invalid Input");
+                        Console.ReadLine();
+                        break; 
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Press Enter to continue...");
+                Console.ReadLine();
             }
         }
         public static void Grades()
@@ -99,22 +123,30 @@ namespace SQLLabb1.Utilities
             Console.WriteLine("2. Average grades.");
             Console.WriteLine("3. Exit ");
 
-            int gradesOption = Convert.ToInt32(Console.ReadLine());
-            switch (gradesOption)
+            if (int.TryParse(Console.ReadLine(), out int gradesOption))
             {
-                case 1:
-                    Grade.GetLatestGrades();
-                    break;
-                case 2:
-                    Grade.GetAverageGrades();
-                    break;
-                case 3:
-                    Console.Clear();
-                    Menu();
-                    break;
-                default:
-                    Console.WriteLine("Invalid Input");
-                    break;
+                switch (gradesOption)
+                {
+                    case 1:
+                        Grade.GetLatestGrades();
+                        break;
+                    case 2:
+                        Grade.GetAverageGrades();
+                        break;
+                    case 3:
+                        Console.Clear();
+                        Menu();
+                        break;
+                    default:
+                        Console.WriteLine("Invalid Input");
+                        Console.ReadLine();
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Press Enter to continue...");
+                Console.ReadLine();
             }
         }
         public static void Add()
@@ -124,22 +156,30 @@ namespace SQLLabb1.Utilities
             Console.WriteLine("2. Add student");
             Console.WriteLine("3. Exit ");
 
-            int addOption = Convert.ToInt32(Console.ReadLine());
-            switch (addOption)
+            if (int.TryParse(Console.ReadLine(), out int addOption))
             {
-                case 1:
-                    AddPerson.AddEmployees();
-                    break;
-                case 2:
-                    AddPerson.AddStudents();
-                    break;
-                case 3:
-                    Console.Clear();
-                    Menu();
-                    break;
-                default:
-                    Console.WriteLine("Invalid Input");
-                    break;
+                switch (addOption)
+                {
+                    case 1:
+                        AddPerson.AddEmployees();
+                        break;
+                    case 2:
+                        AddPerson.AddStudents();
+                        break;
+                    case 3:
+                        Console.Clear();
+                        Menu();
+                        break;
+                    default:
+                        Console.WriteLine("Invalid Input");
+                        Console.ReadLine();
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Press Enter to continue...");
+                Console.ReadLine();
             }
         }
     }
