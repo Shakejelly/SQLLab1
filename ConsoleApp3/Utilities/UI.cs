@@ -1,18 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SQLLabb1.Methods;
-using SQLLabb1.Methods.MenuOptions;
+﻿using SQLLabb1.Methods.MenuOptions;
 
 namespace SQLLabb1.Utilities
 {
     internal class UI
     {
-        public static void Menu()
-        {
-
+  
+            public static void MainLoop()
+            {
+                bool exit = false;
+                while (!exit)
+                {
+                    exit = Menu();
+                }
+            }
+            public static bool Menu() 
+            {
+                Console.Clear();
             Console.WriteLine("1. Students. ");
             Console.WriteLine("2. Employees. ");
             Console.WriteLine("3. Grades. ");
@@ -36,9 +39,8 @@ namespace SQLLabb1.Utilities
                     Add();
                     break;
                 case 5:
-                    Environment.Exit(0);
-                    break;
-                default:
+                        return true;
+                    default:
                     Console.WriteLine("Invalid input");
                         Console.ReadLine();
                         break;
@@ -49,6 +51,7 @@ namespace SQLLabb1.Utilities
                 Console.WriteLine("Invalid input. Press Enter to continue...");
                 Console.ReadLine();
             }
+            return false;
         }
         public static void Students()
         {
@@ -68,9 +71,7 @@ namespace SQLLabb1.Utilities
                         ListSpecific.ListSpecificStudent();
                         break;
                     case 3:
-                        Console.Clear();
-                        Menu();
-                        break;
+                        return;
                     default:
                         Console.WriteLine("Invalid Input.");
                         Console.ReadLine();
@@ -101,9 +102,7 @@ namespace SQLLabb1.Utilities
                         ListSpecific.ListSpecificEmployee();
                         break;
                     case 3:
-                        Console.Clear();
-                        Menu();
-                        break;
+                        return;
                     default:
                         Console.WriteLine("Invalid Input");
                         Console.ReadLine();
@@ -121,7 +120,8 @@ namespace SQLLabb1.Utilities
             Console.Clear();
             Console.WriteLine("1. Get all grades from latest month. ");
             Console.WriteLine("2. Average grades.");
-            Console.WriteLine("3. Exit ");
+            
+            Console.WriteLine("43. Exit ");
 
             if (int.TryParse(Console.ReadLine(), out int gradesOption))
             {
@@ -133,10 +133,8 @@ namespace SQLLabb1.Utilities
                     case 2:
                         Grade.GetAverageGrades();
                         break;
-                    case 3:
-                        Console.Clear();
-                        Menu();
-                        break;
+                        case 3:
+                        return;
                     default:
                         Console.WriteLine("Invalid Input");
                         Console.ReadLine();
@@ -167,9 +165,7 @@ namespace SQLLabb1.Utilities
                         AddPerson.AddStudents();
                         break;
                     case 3:
-                        Console.Clear();
-                        Menu();
-                        break;
+                        return;
                     default:
                         Console.WriteLine("Invalid Input");
                         Console.ReadLine();

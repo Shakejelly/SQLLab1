@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SQLLabb1.Methods.MenuOptions
 {
@@ -11,54 +8,72 @@ namespace SQLLabb1.Methods.MenuOptions
     {
         public static void ListAllStudents()
         {
-            Console.WriteLine("Sort by: 1. First Name 2. Last Name");
-            int sortOption = Convert.ToInt32(Console.ReadLine());
-            string sortColumn = sortOption == 1 ? "FirstName" : "LastName";
-            Console.WriteLine("Order: 1. Ascending 2. Descending");
-            int orderOption = Convert.ToInt32(Console.ReadLine());
-            string order = orderOption == 1 ? "ASC" : "DESC";
-
-            string connectionString = @"Data Source=(localdb)\.;Initial Catalog=SchoolLabb;Integrated Security=True";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            try
             {
-                connection.Open();
+                string connectionString = @"Data Source=(localdb)\.;Initial Catalog=SchoolLabb;Integrated Security=True";
 
-                string sqlQuery = $"SELECT * FROM Students ORDER BY {sortColumn} {order}";
-
-
-                using (SqlCommand commands = new SqlCommand(sqlQuery, connection))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    using (SqlDataReader reader = commands.ExecuteReader())
+                    connection.Open();
+                    Console.WriteLine("Sort by: 1. FirstName, 2. LastName");
+                    int sortOption = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Order: 1. Ascending, 2. Descending");
+                    int orderOption = Convert.ToInt32(Console.ReadLine());
+
+                    string sortColumn = sortOption == 1 ? "FirstName" : "LastName";
+                    string sortOrder = orderOption == 1 ? "ASC" : "DESC";
+
+                    string sqlQuery = $"SELECT * FROM Students ORDER BY {sortColumn} {sortOrder}";
+
+                    using (SqlCommand command = new SqlCommand(sqlQuery, connection))
                     {
-                        while (reader.Read())
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            Console.WriteLine($"Student: {reader["FirstName"]} {reader["LastName"]}, Age: {reader["Age"]}, ClassID: {reader["ClassID"]}");
+                            while (reader.Read())
+                            {
+                                Console.WriteLine($"Student: {reader["FirstName"]} {reader["LastName"]}, Age: {reader["Age"]}, ClassID: {reader["ClassID"]}");
+                            }
                         }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}. Press Enter to continue.");
+               
+            }
+            Console.ReadLine();
         }
+
         public static void ListAllEmployees()
         {
-            string connectionString = @"Data Source=(localdb)\.;Initial Catalog=SchoolLabb;Integrated Security=True";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            try
             {
-                connection.Open();
-                string sqlQuery = "SELECT * FROM Employees";
+                string connectionString = @"Data Source=(localdb)\.;Initial Catalog=SchoolLabb;Integrated Security=True";
 
-                using (SqlCommand commands = new SqlCommand(sqlQuery, connection))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    using (SqlDataReader reader = commands.ExecuteReader())
+                    connection.Open();
+                    string sqlQuery = "SELECT * FROM Employees";
+
+                    using (SqlCommand command = new SqlCommand(sqlQuery, connection))
                     {
-                        while (reader.Read())
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            Console.WriteLine($"Firstname: {reader["FirstName"]} LastName: {reader["LastName"]} Role: {reader["Role"]} ");
+                            while (reader.Read())
+                            {
+                                Console.WriteLine($"Firstname: {reader["FirstName"]}, LastName: {reader["LastName"]}, Role: {reader["Role"]}");
+                            }
                         }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}. Press Enter to continue...");
+                
+            }
+            Console.ReadLine();
         }
     }
 }

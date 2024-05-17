@@ -1,5 +1,4 @@
 ﻿using SQLLabb1.Utilities;
-using System.Data.SqlClient;
 
 namespace ConsoleApp3
 
@@ -8,7 +7,7 @@ namespace ConsoleApp3
     {
         static void Main(string[] args)
         {
-            UI.Menu();
+            UI.MainLoop();
         }
     }
 }
